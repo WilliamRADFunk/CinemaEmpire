@@ -29,7 +29,7 @@ namespace CinemaEmpire.Data.Repositories
                         cmd.CommandText = "INSERT INTO SystemLog (Id, DateCreated, Message) VALUES (@Id, @DateCreated, @Message)";
 
                         cmd.Parameters.AddWithValue("@Id", log.Id);
-                        cmd.Parameters.AddWithValue("@DateCreated", log.DateCreated.ToString("yyyy-MM-dd HH:mm:ss"));
+                        cmd.Parameters.AddWithValue("@DateCreated", log.DateCreated);
                         cmd.Parameters.AddWithValue("@Message", log.Message);
 
                         int numRowsAffected = cmd.ExecuteNonQuery();

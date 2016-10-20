@@ -29,7 +29,7 @@ namespace Demo.Web.Controllers
         public string CreateLog()
         {
             CinemaEmpire.Data.Entities.SystemLog log = new CinemaEmpire.Data.Entities.SystemLog();
-            log.Id = 1;
+            log.Id = 2;
             log.DateCreated = DateTime.Now;
             log.Message = "Hello Universe";
 
