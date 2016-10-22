@@ -31,3 +31,6 @@ C:\Users\Bill Anonymous\Documents\GitHub\portfolio\applications\CinemaEmpire\Cin
 C:\Users\Bill Anonymous\Documents\GitHub\portfolio\applications\CinemaEmpire\CinemaEmpire.Web\obj\Debug\CinemaEmpire.Web.csprojResolveAssemblyReference.cache
 C:\Users\Bill Anonymous\Documents\GitHub\portfolio\applications\CinemaEmpire\CinemaEmpire.Web\obj\Debug\CinemaEmpire.Web.dll
 C:\Users\Bill Anonymous\Documents\GitHub\portfolio\applications\CinemaEmpire\CinemaEmpire.Web\obj\Debug\CinemaEmpire.Web.pdb
+C:\Users\Bill Anonymous\Documents\GitHub\portfolio\applications\CinemaEmpire\CinemaEmpire.Web\bin\CinemaEmpire.Data.dll
+C:\Users\Bill Anonymous\Documents\GitHub\portfolio\applications\CinemaEmpire\CinemaEmpire.Web\bin\MySql.Data.dll
+C:\Users\Bill Anonymous\Documents\GitHub\portfolio\applications\CinemaEmpire\CinemaEmpire.Web\bin\CinemaEmpire.Data.pdb
