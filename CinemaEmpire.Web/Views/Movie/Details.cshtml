@@ -1,0 +1,75 @@
+﻿@using CinemaEmpire.Web.ViewModels
+@model DetailsViewModel
+@{
+    ViewBag.Title = "Details";
+}
+
+<head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+
+<h2>@ViewBag.Title</h2>
+
+<table>
+    <tr>
+        <td>Id: </td>
+        <td>@Model.movie.Id</td>
+    </tr>
+    <tr>
+        <td>Title: </td>
+        <td>@Model.movie.Title</td>
+    </tr>
+    <tr>
+        <td>Synopsis: </td>
+        <td>@Model.movie.Synopsis</td>
+    </tr>
+    <tr>
+        <td>ExpectedPopularity: </td>
+        <td>@Model.movie.ExpectedPopularity</td>
+    </tr>
+    <tr>
+        <td>ActualPopularity: </td>
+        <td>@Model.movie.ActualPopularity</td>
+    </tr>
+    <tr>
+        <td>OptimalSeason: </td>
+        <td>@Model.movie.OptimalSeason</td>
+    </tr>
+    <tr>
+        <td>WorstSeason: </td>
+        <td>@Model.movie.WorstSeason</td>
+    </tr>
+    <tr>
+        <td>Cost of License: </td>
+        <td>@Model.movie.CostLicense</td>
+    </tr>
+    <tr>
+        <td>License Duration: </td>
+        <td>@Model.movie.LicenseLength</td>
+    </tr>
+    <tr>
+        <td>License Duration: </td>
+        <td>@Model.movie.DateCreated UTC</td>
+    </tr>
+    <tr>
+        <td>License Duration: </td>
+        <td>@Model.movie.DateModified UTC</td>
+    </tr>
+
+</table>

@@ -1,12 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace CinemaEmpire.Data.Entities
+namespace CinemaEmpire.Web.ViewModels
 {
-    /// <summary> The structure of a movie and all of its properties. </summary>
+    /// <summary> The Model of a list of all movies in the database. </summary>
+    public class ListViewModel
+    {
+        public List<Movie> Movies;
+
+        public ListViewModel()
+        {
+            Movies = new List<Movie>();
+        }
+    }
+    /// <summary> The Model of a single movie and all of it's attributes </summary>
+    public class DetailsViewModel
+    {
+        public Movie movie;
+
+        public DetailsViewModel()
+        {
+            movie = new Movie();
+        }
+
+        public DetailsViewModel(string id, string title, string synopsis, float expectedPopularity, float actualPopularity, int optimalSeason, int worstSeason, float costLicense, int licenseLength, string dateCreated, string dateModified)
+        {
+            movie = new Movie(id, title, synopsis, expectedPopularity, actualPopularity, optimalSeason, worstSeason, costLicense, licenseLength, dateCreated, dateModified);
+        }
+    }
+    /// <summary> Web-layer version of the Data-layer's Movie Entity </summary>
     public class Movie
     {
         public string Id { get; set; }
@@ -39,6 +63,16 @@ namespace CinemaEmpire.Data.Entities
             this.LicenseLength = licenseLength;
             this.DateCreated = dateCreated;
             this.DateModified = dateModified;
+        }
+        
+        // Return string no greater than legnth == 80
+        public string GetShorterSynopsis()
+        {
+            if(this.Synopsis.Length > 80)
+            {
+                return (this.Synopsis.Substring(0, 80) + "...");
+            }
+            return this.Synopsis;
         }
     }
 }

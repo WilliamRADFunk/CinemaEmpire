@@ -4,3 +4,9 @@ C:\Users\Bill Anonymous\Documents\GitHub\portfolio\applications\CinemaEmpire\Cin
 C:\Users\Bill Anonymous\Documents\GitHub\portfolio\applications\CinemaEmpire\CinemaEmpire.Data\obj\Debug\CinemaEmpire.Data.csprojResolveAssemblyReference.cache
 C:\Users\Bill Anonymous\Documents\GitHub\portfolio\applications\CinemaEmpire\CinemaEmpire.Data\obj\Debug\CinemaEmpire.Data.dll
 C:\Users\Bill Anonymous\Documents\GitHub\portfolio\applications\CinemaEmpire\CinemaEmpire.Data\obj\Debug\CinemaEmpire.Data.pdb
+C:\Users\William Funk\Documents\GitHub\portfolio\applications\CinemaEmpire\CinemaEmpire.Data\bin\Debug\CinemaEmpire.Data.dll
+C:\Users\William Funk\Documents\GitHub\portfolio\applications\CinemaEmpire\CinemaEmpire.Data\bin\Debug\CinemaEmpire.Data.pdb
+C:\Users\William Funk\Documents\GitHub\portfolio\applications\CinemaEmpire\CinemaEmpire.Data\bin\Debug\MySql.Data.dll
+C:\Users\William Funk\Documents\GitHub\portfolio\applications\CinemaEmpire\CinemaEmpire.Data\obj\Debug\CinemaEmpire.Data.csprojResolveAssemblyReference.cache
+C:\Users\William Funk\Documents\GitHub\portfolio\applications\CinemaEmpire\CinemaEmpire.Data\obj\Debug\CinemaEmpire.Data.dll
+C:\Users\William Funk\Documents\GitHub\portfolio\applications\CinemaEmpire\CinemaEmpire.Data\obj\Debug\CinemaEmpire.Data.pdb

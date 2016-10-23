@@ -1,0 +1,53 @@
+﻿@using CinemaEmpire.Web.ViewModels
+@model ListViewModel
+@{
+    ViewBag.Title = "List";
+}
+
+<head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+
+<h2>@ViewBag.Title</h2>
+
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Synopsis</th>
+        <th>Date Created</th>
+        <th>Date Last Modified</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var item in Model.Movies)
+    {
+        <tr>
+            <td>@item.Title</td>
+            <td>@item.GetShorterSynopsis()</td>
+            <td>@item.DateCreated</td>
+            <td>@item.DateModified</td>
+            <td nowrap><span style="margin-right: 20px; text-decoration:underline;">@Html.ActionLink("Details", "Details", "Movie", new { id = @item.Id }, null)</span>
+                <span style="margin-right: 20px; text-decoration:underline;">@Html.ActionLink("Edit", "Edit", "Movie", new { id = @item.Id }, null)</span>
+                <span style="text-decoration:underline;">@Html.ActionLink("Delete", "Delete", "Movie", new { id = @item.Id }, null)</span>
+            </td>
+        </tr>
+    }
+</table>
+<hr/>
+<p style="text-decoration:underline;">@Html.ActionLink("Create a movie", "Create", "Movie")</p>
+

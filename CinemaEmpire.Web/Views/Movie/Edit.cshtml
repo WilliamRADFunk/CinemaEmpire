@@ -1,0 +1,78 @@
+﻿@using CinemaEmpire.Web.ViewModels
+@model DetailsViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+<head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #aaaaaa;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #eeeeee;
+        }
+        td input {
+            width: 100%;
+        }
+        textarea {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("EditSubmit", "Movie", new { Id = Model.movie.Id } ))
+{
+    <table>
+        <tr>
+            <td style="width:20%;">@Html.LabelFor(Model => Model.movie.Title, new { @for = "Title" } )</td>
+            <td style="width:80%;">@Html.TextBoxFor(Model => Model.movie.Title, new { @type = "text", Name = "Title" })</td>
+        </tr>
+        <tr>
+            <td style="width:20%;">@Html.LabelFor(Model => Model.movie.Synopsis, new { @for = "Synopsis" })</td>
+            <td>@Html.TextAreaFor(Model => Model.movie.Synopsis, new { Name = "Synopsis" })</td>
+        </tr>
+        <tr>
+            <td style="width:20%;">@Html.LabelFor(Model => Model.movie.ExpectedPopularity, new { @for = "ExpectedPopularity" })</td>
+            <td>@Html.TextBoxFor(Model => Model.movie.ExpectedPopularity, new { @type = "number", Name = "ExpectedPopularity" } )</td>
+        </tr>
+        <tr>
+            <td style="width:20%;">@Html.LabelFor(Model => Model.movie.ActualPopularity, new { @for = "ActualPopularity" })</td>
+            <td>@Html.TextBoxFor(Model => Model.movie.ActualPopularity, new { @type = "number", Name = "ActualPopularity" })</td>
+        </tr>
+        <tr>
+            <td style="width:20%;">@Html.LabelFor(Model => Model.movie.OptimalSeason, new { @for = "OptimalSeason" })</td>
+            <td>@Html.TextBoxFor(Model => Model.movie.OptimalSeason, new { @type = "number", Name = "OptimalSeason" })</td>
+        </tr>
+        <tr>
+            <td style="width:20%;">@Html.LabelFor(Model => Model.movie.WorstSeason, new { @for = "WorstSeason" })</td>
+            <td>@Html.TextBoxFor(Model => Model.movie.WorstSeason, new { @type = "number", Name = "WorstSeason" })</td>
+        </tr>
+        <tr>
+            <td style="width:20%;">@Html.LabelFor(Model => Model.movie.CostLicense, new { @for = "CostLicense" })</td>
+            <td>@Html.TextBoxFor(Model => Model.movie.CostLicense, new { @type = "number", Name = "CostLicense" })</td>
+        </tr>
+        <tr>
+            <td style="width:20%;">@Html.LabelFor(Model => Model.movie.LicenseLength, new { @for = "LicenseLength" })</td>
+            <td>@Html.TextBoxFor(Model => Model.movie.LicenseLength, new { @type = "number", Name = "LicenseLength" })</td>
+        </tr>
+    </table>
+    <hr/>
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Edit Movie" class="btn btn-default" />
+    </div>
+}
+
+<hr/>
+<br/>
