@@ -118,57 +118,43 @@ namespace CinemaEmpire.Data.Repositories
             MySqlConnection conn;
             string myConnectionString;
             myConnectionString = "server=mysql.creativecrew.org;uid=williamfunk;pwd=williamchang;database=creativecrew_cinemaempire;";
-
-            try
+            
+            using (conn = new MySqlConnection())
             {
-                using (conn = new MySqlConnection())
+                conn.ConnectionString = myConnectionString;
+                conn.Open();
+
+                using (MySqlCommand cmd = new MySqlCommand())
                 {
-                    conn.ConnectionString = myConnectionString;
-                    conn.Open();
+                    cmd.Connection = conn;
+                    cmd.CommandText = "UPDATE Movie SET Title=@Title," +
+                                        "Synopsis=@Synopsis," +
+                                        "ExpectedPopularity=@ExpectedPopularity," +
+                                        "ActualPopularity=@ActualPopularity," +
+                                        "OptimalSeason=@OptimalSeason," +
+                                        "WorstSeason=@WorstSeason," +
+                                        "CostLicense=@CostLicense," +
+                                        "LicenseLength=@LicenseLength," +
+                                        "DateModified=@DateModified" +
+                                        "WHERE Id=@Id";
 
-                    using (MySqlCommand cmd = new MySqlCommand())
+                    cmd.Parameters.AddWithValue("@Title", title);
+                    cmd.Parameters.AddWithValue("@Synopsis", synopsis);
+                    cmd.Parameters.AddWithValue("@ExpectedPopularity", expectedPopularity);
+                    cmd.Parameters.AddWithValue("@ActualPopularity", actualPopularity);
+                    cmd.Parameters.AddWithValue("@OptimalSeason", optimalSeason);
+                    cmd.Parameters.AddWithValue("@WorstSeason", worstSeason);
+                    cmd.Parameters.AddWithValue("@CostLicense", costLicense);
+                    cmd.Parameters.AddWithValue("@LicenseLength", licenseLength);
+                    cmd.Parameters.AddWithValue("@DateModified", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                    cmd.Parameters.AddWithValue("@Id", id);
+
+                    int numRowsAffected = cmd.ExecuteNonQuery();
+                    if (numRowsAffected <= 0)
                     {
-                        cmd.Connection = conn;
-                        cmd.CommandText =   "UPDATE Movie SET Title=@Title," +
-                                            "Synopsis=@Synopsis," +
-                                            "ExpectedPopularity=@ExpectedPopularity," +
-                                            "ActualPopularity=@ActualPopularity," +
-                                            "OptimalSeason=@OptimalSeason," +
-                                            "WorstSeason=@WorstSeason," +
-                                            "CostLicense=@CostLicense," +
-                                            "LicenseLength=@LicenseLength," +
-                                            "DateModified=@DateModified" +
-                                            "WHERE Id=@Id";
-
-                        cmd.Parameters.AddWithValue("@Title", title);
-                        cmd.Parameters.AddWithValue("@Synopsis", synopsis);
-                        cmd.Parameters.AddWithValue("@ExpectedPopularity", expectedPopularity);
-                        cmd.Parameters.AddWithValue("@ActualPopularity", actualPopularity);
-                        cmd.Parameters.AddWithValue("@OptimalSeason", optimalSeason);
-                        cmd.Parameters.AddWithValue("@WorstSeason", worstSeason);
-                        cmd.Parameters.AddWithValue("@CostLicense", costLicense);
-                        cmd.Parameters.AddWithValue("@LicenseLength", licenseLength);
-                        cmd.Parameters.AddWithValue("@DateModified", DateTime.Now.ToString());
-                        cmd.Parameters.AddWithValue("@Id", id);
-
-                        try
-                        {
-                            int numRowsAffected = cmd.ExecuteNonQuery();
-                            if (numRowsAffected <= 0)
-                            {
-                                throw new Exception(String.Format("numRowsAffected: {0}", numRowsAffected));
-                            }
-                        }
-                        catch(Exception ex)
-                        {
-                            throw new Exception(ex.Message);
-                        }
+                        throw new Exception(String.Format("numRowsAffected: {0}", numRowsAffected));
                     }
                 }
-            }
-            catch (MySqlException ex)
-            {
-                throw new Exception(ex.Message);
             }
         }
         /// <summary> Deletes a specific movie from the database (by Id) </summary>

@@ -103,8 +103,8 @@ namespace CinemaEmpire.Web.Controllers
             var culture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
             culture.NumberFormat.NumberDecimalSeparator = ".";
 
-            try
-            {
+            //try
+            //{
                 string title = collection.Get("Title");
                 string synopsis = collection.Get("Synopsis");
                 float expectedPopularity = float.Parse(collection.Get("ExpectedPopularity"), culture);
@@ -115,12 +115,12 @@ namespace CinemaEmpire.Web.Controllers
                 int licenseLength = Int32.Parse(collection.Get("LicenseLength"));
 
                 cinemaRepo.EditMovie(id, title, synopsis, expectedPopularity, actualPopularity, optimalSeason, worstSeason, costLicense, licenseLength);
-            }
-            catch(Exception ex)
-            {
+            //}
+            //catch(Exception ex)
+            //{
 
-                throw new Exception(ex.Message);
-            }
+                //throw new Exception(ex.Message);
+            //}
 
             return RedirectToAction("Edit/" + id);
         }
