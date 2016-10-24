@@ -8,6 +8,55 @@ namespace CinemaEmpire.Data.Repositories
 {
     public class CinemaRepository
     {
+        /// <summary> Creates a movie </summary>
+        public void CreateMovie(string title, string synopsis, float expectedPopularity, float actualPopularity, int optimalSeason, int worstSeason, float costLicense, int licenseLength)
+        {
+            MySqlConnection conn;
+            string myConnectionString;
+            myConnectionString = "server=mysql.creativecrew.org;uid=williamfunk;pwd=williamchang;database=creativecrew_cinemaempire;";
+
+            using (conn = new MySqlConnection())
+            {
+                conn.ConnectionString = myConnectionString;
+                conn.Open();
+
+                try
+                {
+                    using (MySqlCommand cmd = new MySqlCommand())
+                    {
+                        cmd.Connection = conn;
+                        StringBuilder sb = new StringBuilder();
+                        sb.Append("INSERT INTO Movie ");
+                        sb.Append("(Id,Title,Synopsis,ExpectedPopularity,ActualPopularity,OptimalSeason,WorstSeason,CostLicense,LicenseLength,DateCreated,DateModified) ");
+                        sb.Append("VALUES ");
+                        sb.Append("(@Id,@Title,@Synopsis,@ExpectedPopularity,@ActualPopularity,@OptimalSeason,@WorstSeason,@CostLicense,@LicenseLength,@DateCreated,@DateModified)");
+                        cmd.CommandText = sb.ToString();
+
+                        cmd.Parameters.AddWithValue("@Id", Guid.NewGuid());
+                        cmd.Parameters.AddWithValue("@Title", title);
+                        cmd.Parameters.AddWithValue("@Synopsis", synopsis);
+                        cmd.Parameters.AddWithValue("@ExpectedPopularity", expectedPopularity);
+                        cmd.Parameters.AddWithValue("@ActualPopularity", actualPopularity);
+                        cmd.Parameters.AddWithValue("@OptimalSeason", optimalSeason);
+                        cmd.Parameters.AddWithValue("@WorstSeason", worstSeason);
+                        cmd.Parameters.AddWithValue("@CostLicense", costLicense);
+                        cmd.Parameters.AddWithValue("@LicenseLength", licenseLength);
+                        cmd.Parameters.AddWithValue("@DateCreated", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                        cmd.Parameters.AddWithValue("@DateModified", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+
+                        int numRowsAffected = cmd.ExecuteNonQuery();
+                        if (numRowsAffected <= 0)
+                        {
+                            throw new Exception(String.Format("numRowsAffected: {0}", numRowsAffected));
+                        }
+                    }
+                }
+                catch (MySqlException ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
+        }
         /// <summary> Gets all of the movies in the Movie table and returns them in list form </summary>
         public List<Movie> GetListOfMovies()
         {
