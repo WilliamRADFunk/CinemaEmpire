@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using CinemaEmpire.Data.Entities;
 using MySql.Data.MySqlClient;
 
@@ -124,36 +122,45 @@ namespace CinemaEmpire.Data.Repositories
                 conn.ConnectionString = myConnectionString;
                 conn.Open();
 
-                using (MySqlCommand cmd = new MySqlCommand())
+                try
                 {
-                    cmd.Connection = conn;
-                    cmd.CommandText = "UPDATE Movie SET Title=@Title," +
-                                        "Synopsis=@Synopsis," +
-                                        "ExpectedPopularity=@ExpectedPopularity," +
-                                        "ActualPopularity=@ActualPopularity," +
-                                        "OptimalSeason=@OptimalSeason," +
-                                        "WorstSeason=@WorstSeason," +
-                                        "CostLicense=@CostLicense," +
-                                        "LicenseLength=@LicenseLength," +
-                                        "DateModified=@DateModified" +
-                                        "WHERE Id=@Id";
-
-                    cmd.Parameters.AddWithValue("@Title", title);
-                    cmd.Parameters.AddWithValue("@Synopsis", synopsis);
-                    cmd.Parameters.AddWithValue("@ExpectedPopularity", expectedPopularity);
-                    cmd.Parameters.AddWithValue("@ActualPopularity", actualPopularity);
-                    cmd.Parameters.AddWithValue("@OptimalSeason", optimalSeason);
-                    cmd.Parameters.AddWithValue("@WorstSeason", worstSeason);
-                    cmd.Parameters.AddWithValue("@CostLicense", costLicense);
-                    cmd.Parameters.AddWithValue("@LicenseLength", licenseLength);
-                    cmd.Parameters.AddWithValue("@DateModified", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-                    cmd.Parameters.AddWithValue("@Id", id);
-
-                    int numRowsAffected = cmd.ExecuteNonQuery();
-                    if (numRowsAffected <= 0)
+                    using (MySqlCommand cmd = new MySqlCommand())
                     {
-                        throw new Exception(String.Format("numRowsAffected: {0}", numRowsAffected));
+                        cmd.Connection = conn;
+                        StringBuilder sb = new StringBuilder();
+                        sb.Append("UPDATE Movie SET Title=@Title,");
+                        sb.Append("Synopsis=@Synopsis,");
+                        sb.Append("ExpectedPopularity=@ExpectedPopularity,");
+                        sb.Append("ActualPopularity=@ActualPopularity,");
+                        sb.Append("OptimalSeason=@OptimalSeason,");
+                        sb.Append("WorstSeason=@WorstSeason,");
+                        sb.Append("CostLicense=@CostLicense,");
+                        sb.Append("LicenseLength=@LicenseLength,");
+                        sb.Append("DateModified=@DateModified ");
+                        sb.Append("WHERE Id=@Id");
+                        cmd.CommandText = sb.ToString();
+
+                        cmd.Parameters.AddWithValue("@Title", title);
+                        cmd.Parameters.AddWithValue("@Synopsis", synopsis);
+                        cmd.Parameters.AddWithValue("@ExpectedPopularity", expectedPopularity);
+                        cmd.Parameters.AddWithValue("@ActualPopularity", actualPopularity);
+                        cmd.Parameters.AddWithValue("@OptimalSeason", optimalSeason);
+                        cmd.Parameters.AddWithValue("@WorstSeason", worstSeason);
+                        cmd.Parameters.AddWithValue("@CostLicense", costLicense);
+                        cmd.Parameters.AddWithValue("@LicenseLength", licenseLength);
+                        cmd.Parameters.AddWithValue("@DateModified", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                        cmd.Parameters.AddWithValue("@Id", id);
+
+                        int numRowsAffected = cmd.ExecuteNonQuery();
+                        if (numRowsAffected <= 0)
+                        {
+                            throw new Exception(String.Format("numRowsAffected: {0}", numRowsAffected));
+                        }
                     }
+                }
+                catch (MySqlException ex)
+                {
+                    throw new Exception(ex.Message);
                 }
             }
         }

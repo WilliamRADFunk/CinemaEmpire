@@ -21,6 +21,20 @@
         tr:nth-child(even) {
             background-color: #dddddd;
         }
+
+        input[type="submit"]
+        {
+            background: none;
+            border: none;
+            box-sizing: unset;
+            color: #428bca;
+            -webkit-appearance: none;
+            font-family: arial, sans-serif;
+            font-size: 14px;
+            line-height: inherit;
+            padding: 0px;
+            text-decoration: underline;
+        }
     </style>
 </head>
 
@@ -41,13 +55,20 @@
             <td>@item.GetShorterSynopsis()</td>
             <td>@item.DateCreated</td>
             <td>@item.DateModified</td>
-            <td nowrap><span style="margin-right: 20px; text-decoration:underline;">@Html.ActionLink("Details", "Details", "Movie", new { id = @item.Id }, null)</span>
-                <span style="margin-right: 20px; text-decoration:underline;">@Html.ActionLink("Edit", "Edit", "Movie", new { id = @item.Id }, null)</span>
-                <span style="text-decoration:underline;">@Html.ActionLink("Delete", "Delete", "Movie", new { id = @item.Id }, null)</span>
+            <td nowrap>
+                <ul style="list-style: none; padding-left: 0px;">
+                    <li style="display: inline-block; margin-right: 20px; text-decoration:underline;">@Html.ActionLink("Details", "Details", "Movie", new { id = @item.Id }, null)</li>
+                    <li style="display: inline-block; margin-right: 20px; text-decoration:underline;">@Html.ActionLink("Edit", "Edit", "Movie", new { id = @item.Id }, null)</li>
+                    <li style="display: inline-block;">
+                        @using (Html.BeginForm("Delete", "Movie", new { id = @item.Id }))
+                        {
+                            <input type="submit" value="Delete" />
+                        }
+                    </li>
+                </ul>
             </td>
         </tr>
     }
 </table>
 <hr/>
 <p style="text-decoration:underline;">@Html.ActionLink("Create a movie", "Create", "Movie")</p>
-

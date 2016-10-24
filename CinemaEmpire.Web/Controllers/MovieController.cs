@@ -11,6 +11,7 @@ namespace CinemaEmpire.Web.Controllers
     {
         /// <summary> Action that compiles and displays the full list of all movies in the database. </summary>
         /// GET: Movie/List
+        [AcceptVerbs(HttpVerbs.Get)]
         public ActionResult List()
         {
             Data.Repositories.CinemaRepository cinemaRepo = new Data.Repositories.CinemaRepository();
@@ -44,6 +45,7 @@ namespace CinemaEmpire.Web.Controllers
         }
         /// <summary> Action that compiles and displays all attributes of a single movie (by Id) </summary>
         /// GET: Movie/Details
+        [AcceptVerbs(HttpVerbs.Get)]
         public ActionResult Details(string id)
         {
             Data.Repositories.CinemaRepository cinemaRepo = new Data.Repositories.CinemaRepository();
@@ -70,6 +72,7 @@ namespace CinemaEmpire.Web.Controllers
         }
         /// <summary> Action that compiles and displays all attributes of a single movie (by Id) into text fields for editing.</summary>
         /// GET: Movie/Details
+        [AcceptVerbs(HttpVerbs.Get)]
         public ActionResult Edit(string id)
         {
             Data.Repositories.CinemaRepository cinemaRepo = new Data.Repositories.CinemaRepository();
@@ -96,6 +99,7 @@ namespace CinemaEmpire.Web.Controllers
         }
         /// <summary> Action that submits user edits to movie in the database (by Id) </summary>
         /// POST: Movie/EditSubmit
+        [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult EditSubmit(string id, FormCollection collection)
         {
             Data.Repositories.CinemaRepository cinemaRepo = new Data.Repositories.CinemaRepository();
@@ -103,8 +107,8 @@ namespace CinemaEmpire.Web.Controllers
             var culture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
             culture.NumberFormat.NumberDecimalSeparator = ".";
 
-            //try
-            //{
+            try
+            {
                 string title = collection.Get("Title");
                 string synopsis = collection.Get("Synopsis");
                 float expectedPopularity = float.Parse(collection.Get("ExpectedPopularity"), culture);
@@ -115,17 +119,18 @@ namespace CinemaEmpire.Web.Controllers
                 int licenseLength = Int32.Parse(collection.Get("LicenseLength"));
 
                 cinemaRepo.EditMovie(id, title, synopsis, expectedPopularity, actualPopularity, optimalSeason, worstSeason, costLicense, licenseLength);
-            //}
-            //catch(Exception ex)
-            //{
+            }
+            catch(Exception ex)
+            {
 
-                //throw new Exception(ex.Message);
-            //}
+                throw new Exception(ex.Message);
+            }
 
             return RedirectToAction("Edit/" + id);
         }
         /// <summary> Action that deletes from the database a movie (by Id) </summary>
         /// DELETE: Movie/Delete
+        [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Delete(string id)
         {
             Data.Repositories.CinemaRepository cinemaRepo = new Data.Repositories.CinemaRepository();
